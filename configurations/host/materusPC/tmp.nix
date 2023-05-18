@@ -1,47 +1,5 @@
 { config, pkgs, lib, inputs, materusFlake, materusPkgs, ... }:
 let
-  steam = pkgs.steam.override {
-    extraPkgs = pkgs: [
-      pkgs.nss_latest
-      pkgs.libstrangle
-      pkgs.libkrb5
-      pkgs.keyutils
-      pkgs.libGL
-      pkgs.libglvnd
-      pkgs.gamescope
-      pkgs.steamPackages.steam
-      pkgs.libxcrypt
-      pkgs.gnutls
-      pkgs.xorg.libXcursor
-      pkgs.xorg.libXi
-      pkgs.xorg.libXinerama
-      pkgs.xorg.libXScrnSaver
-      pkgs.openvdb
-      pkgs.tbb_2021_8
-      pkgs.gtk4
-      pkgs.gtk3
-      pkgs.glib
-      pkgs.gsettings-desktop-schemas
-
-
-
-
-    ];
-
-    extraLibraries = pkgs: [
-      pkgs.libkrb5
-      pkgs.keyutils
-      pkgs.ncurses6
-      pkgs.fontconfig
-      pkgs.libxcrypt
-      pkgs.gnutls
-      pkgs.gsettings-desktop-schemas
-
-    ];
-    extraEnv = { XDG_DATA_DIRS = "/usr/share:$XDG_DATA_DIRS"; };
-
-  };
-
 
   grml-config = pkgs.fetchFromGitHub {
     owner = "grml";
@@ -210,8 +168,6 @@ in
 
     #SSH_ASKPASS_REQUIRE = "prefer";
 
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-
     MOZ_USE_XINPUT2 = "1";
     PATH = [
       "\${XDG_BIN_HOME}"
@@ -250,11 +206,6 @@ in
   environment.pathsToLink = [ "/share/zsh" "/share/bash-completion" "/share/fish" ];
   environment.shells = with pkgs; [ zsh bashInteractive fish ];
   programs = {
-    steam = {
-      enable = true;
-      dedicatedServer.openFirewall = true;
-      remotePlay.openFirewall = true;
-    };
     fish.enable = true;
     zsh = {
       enable = true;
@@ -271,28 +222,6 @@ in
     command-not-found.enable = false;
     dconf.enable = true;
   };
-
-  fonts.fontDir.enable = true;
-  fonts.enableDefaultFonts = true;
-  fonts.fonts = with pkgs; [
-    dejavu_fonts
-    hack-font
-    noto-fonts
-    noto-fonts-extra
-    noto-fonts-emoji
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    ubuntu_font_family
-    wqy_zenhei
-    monocraft
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Meslo" "ProFont" ]; })
-  ];
-  fonts.fontconfig.enable = true;
-  fonts.fontconfig.cache32Bit = true;
-  fonts.fontconfig.defaultFonts.sansSerif = [ "Noto Sans" "DejaVu Sans" "WenQuanYi Zen Hei" "Noto Color Emoji" ];
-  fonts.fontconfig.defaultFonts.serif = [ "Noto Serif" "DejaVu Serif" "WenQuanYi Zen Hei" "Noto Color Emoji"];
-  fonts.fontconfig.defaultFonts.emoji = [ "Noto Color Emoji" "OpenMoji Color" ];
-  fonts.fontconfig.defaultFonts.monospace = [ "FiraCode Nerd Font Mono" "Noto Sans Mono" "WenQuanYi Zen Hei Mono" ];
   networking.networkmanager.extraConfig = lib.mkDefault ''
   [connectivity]
   uri=http://nmcheck.gnome.org/check_network_status.txt
@@ -300,8 +229,6 @@ in
 
   environment.systemPackages = with pkgs; [
     firefox
-    steam
-    steam.run
     gamescope
     (pkgs.lutris.override { extraLibraries = pkgs: with pkgs;  [ pkgs.libunwind pkgs.libusb1 pkgs.gnutls pkgs.gtk3 pkgs.pango ]; })
     materusPkgs.amdgpu-pro-libs.prefixes
