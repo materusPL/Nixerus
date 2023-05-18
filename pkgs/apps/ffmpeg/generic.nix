@@ -703,7 +703,7 @@ stdenv.mkDerivation (finalAttrs: {
     license = with licenses; [ lgpl21Plus ]
       ++ optional withGPL gpl2Plus
       ++ optional withGPLv3 gpl3Plus
-      ++ optional withUnfree unfreeRedistributable;
+      ++ optional withUnfree unfree;
     pkgConfigModules = [ "libavutil" ];
     platforms = platforms.all;
     maintainers = with maintainers; [ atemu ];
