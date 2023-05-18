@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, materusPkgs, lib, ... }:
 {
   home.stateVersion = "23.05";
   home.homeDirectory = "/home/materus";
@@ -14,4 +14,6 @@
     enableNixDevel = lib.mkDefault true;
 
   };
+
+  home.packages = [materusPkgs.ffmpeg6-amf materusPkgs.obs-amf];
 }
