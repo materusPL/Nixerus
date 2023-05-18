@@ -7,14 +7,23 @@
 #     nix-build -A mypackage
 
 { pkgs ? import <nixpkgs> { } }:
+let
+  materusPkgs = packages // utils //
+    (if pkgs.system == "x86_64-linux" then { i686Linux = import ./. { pkgs = pkgs.pkgsi686Linux; }; } else { });
+  callPackage = pkgs.lib.callPackageWith (pkgs // packages // { inherit materusPkgs; } //
+    (if pkgs.system == "x86_64-linux" then { pkgsi686Linux = pkgs.pkgsi686Linux // materusPkgs.i686Linux; } else { }));
 
-{
-  # The `lib`, `modules`, and `overlay` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
-  modules = import ./modules; # NixOS modules
-  overlays = import ./overlays; # nixpkgs overlays
 
-  example-package = pkgs.callPackage ./pkgs/example-package { };
-  # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
-  # ...
-}
+  packages = import ./pkgs { inherit pkgs; inherit callPackage; };
+
+
+  utils = {
+    # The `lib`, `modules`, and `overlay` names are special
+    lib = import ./lib { inherit pkgs; };
+    modules = import ./modules;
+    overlays = import ./overlays;
+  };
+
+in
+packages // utils
+
