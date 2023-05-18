@@ -116,7 +116,7 @@
  */
 , withGPL ? true
 , withGPLv3 ? true
-, withUnfree ? true
+, withUnfree ? false
 
 /*
  *  Build options
@@ -703,7 +703,7 @@ stdenv.mkDerivation (finalAttrs: {
     license = with licenses; [ lgpl21Plus ]
       ++ optional withGPL gpl2Plus
       ++ optional withGPLv3 gpl3Plus
-      ++ optional withUnfree unfree;
+      ++ optional withUnfree unfreeRedistributable;
     pkgConfigModules = [ "libavutil" ];
     platforms = platforms.all;
     maintainers = with maintainers; [ atemu ];
