@@ -27,7 +27,7 @@ with materusPkgs.lib;
 
   options.materus.profile.packages.list.desktopApps = mkPrivateVar (with pkgs; [
     barrier
-    (discord.override { nss = nss_latest; })
+    (discord.override { nss = nss_latest; withOpenASAR = true; withTTS = true;})
     tdesktop
     mpv
     ani-cli
