@@ -1,5 +1,5 @@
 {pkgs, callPackage}:
-{
+rec {
    amdgpu-pro-libs = pkgs.lib.recurseIntoAttrs {
       vulkan = callPackage ./libs/amdgpu-pro-libs { };
       amf = callPackage ./libs/amdgpu-pro-libs/amf.nix { };
@@ -8,7 +8,10 @@
     };
 
 
-    ffmpeg6-amf = callPackage ./apps/ffmpeg {};
-    obs-amf = callPackage ./apps/obs {};
+    ffmpeg6-amf-full = pkgs.callPackage ./apps/ffmpeg {inherit (pkgs.darwin.apple_sdk.frameworks)
+      Cocoa CoreServices CoreAudio CoreMedia AVFoundation MediaToolbox
+      VideoDecodeAcceleration VideoToolbox;};
+
+    obs-amf =  pkgs.qt6Packages.callPackage ./apps/obs { ffmpeg = ffmpeg6-amf-full;};
 
 }

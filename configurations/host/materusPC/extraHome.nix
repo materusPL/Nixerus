@@ -15,5 +15,11 @@
 
   };
 
-  home.packages = [materusPkgs.ffmpeg6-amf materusPkgs.obs-amf];
+  home.packages = [materusPkgs.ffmpeg6-amf-full];
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [wlrobs obs-vaapi obs-vkcapture obs-gstreamer input-overlay obs-multi-rtmp obs-pipewire-audio-capture];
+    package = materusPkgs.obs-amf;
+  };
 }
