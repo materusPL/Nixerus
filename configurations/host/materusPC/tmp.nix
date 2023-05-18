@@ -36,9 +36,7 @@ in
     services.flatpak.enable = true;
   services.gvfs.enable = true;
 
-  networking.hostName = "materusPC";
 
-  networking.networkmanager.enable = true; 
 
   time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "pl_PL.UTF-8";
@@ -189,9 +187,7 @@ in
   services.samba-wsdd.enable = true;
 
   services.samba.enable = true;
-  networking.firewall.allowedTCPPorts = [ 24800 5900  5357 4656];
-  networking.firewall.allowedUDPPorts = [ 24800 5900  3702 4656];
-  networking.firewall.enable = true;
+  
 
   programs.gnupg.agent = {
     enable = true;
@@ -222,10 +218,7 @@ in
     command-not-found.enable = false;
     dconf.enable = true;
   };
-  networking.networkmanager.extraConfig = lib.mkDefault ''
-  [connectivity]
-  uri=http://nmcheck.gnome.org/check_network_status.txt
-  '';
+
 
   environment.systemPackages = with pkgs; [
     firefox
