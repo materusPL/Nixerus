@@ -46,16 +46,15 @@
 
 let
   inherit (lib) optional optionals;
-  ver = "29.0.2";
 in
 stdenv.mkDerivation rec {
-  pname = "obs-studio";
-  version = ver + "-amf";
+  pname = "obs-studio-amf";
+  version = "29.0.2";
 
   src = fetchFromGitHub {
     owner = "obsproject";
     repo = "obs-studio";
-    rev = ver;
+    rev = version;
     sha256 = "sha256-TIUSjyPEsKRNTSLQXuLJGEgD989hJ5GhOsqJ4nkKVsY=";
     fetchSubmodules = true;
   };
