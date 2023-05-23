@@ -30,7 +30,8 @@ in
       vim-nix
 
       nvim-fzf
-
+      nvim-treesitter
+      
       coc-clangd
       coc-python
       coc-pyright
