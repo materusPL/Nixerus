@@ -119,7 +119,14 @@
   system.stateVersion = "23.05"; # Did you read the comment?
 
 
+services.nginx = {
+  enable = true;
+  addSSL = true;
 
+  recommendedTlsSettings = true;
+  recommendedOptimisation = true;
+  recommendedGzipSettings = true;
+};
 
 
 
