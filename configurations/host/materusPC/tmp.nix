@@ -23,7 +23,7 @@ in
 
   services.xserver.displayManager.startx.enable = true;
   services.teamviewer.enable = true;
-  
+
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
   ];
@@ -110,31 +110,7 @@ in
     qemu.runAsRoot = true;
     qemu.swtpm.enable = true;
   };
-  virtualisation.libvirtd.qemu.package = pkgs.qemu_full;
-  systemd.services.libvirtd = {
-    path =
-      let
-        env = pkgs.buildEnv {
-          name = "qemu-hook-env";
-          paths = with pkgs; [
-            bash
-            libvirt
-            kmod
-            systemd
-            ripgrep
-            sd
-            coreutils
-            sudo
-            su
-            killall
-            procps
-            util-linux
-            bindfs
-          ];
-        };
-      in
-      [ env ];
-  };
+
 
   users.users.materus = {
     isNormalUser = true;
@@ -181,7 +157,10 @@ in
   services.pcscd.enable = true;
   services.samba-wsdd.enable = true;
 
-  services.samba.enable = true;
+  services.samba = {
+    enable = true;
+    package = pkgs.sambaFull;
+  };
 
 
   programs.gnupg.agent = {
@@ -271,10 +250,6 @@ in
     zip
     gzip
 
-    virtiofsd
-    config.virtualisation.libvirtd.qemu.package
-    looking-glass-client
-
     tree
     mc
     lf
@@ -315,8 +290,7 @@ in
 
 
 
-    virt-manager
-    libguestfs
+    
 
     bubblewrap
     bindfs
