@@ -1,13 +1,4 @@
 { config, pkgs, lib, inputs, materusFlake, materusPkgs, ... }:
-let
-
-  grml-config = pkgs.fetchFromGitHub {
-    owner = "grml";
-    repo = "grml-etc-core";
-    rev = "a2cda85d3d56fd5f5a7b954a444fd151318c4680";
-    sha256 = "0ap8lmqi45yjyjazdm1v64fz1rfqhkhfpdp2z17ag6hs5wi6i67y";
-  };
-in
 {
   virtualisation.lxc.enable = true;
   virtualisation.lxc.lxcfs.enable = true;
@@ -173,7 +164,7 @@ in
       enable = true;
       interactiveShellInit = ''
         if [[ ''${__MATERUS_HM_ZSH:-0} == 0 ]]; then
-          source ${grml-config}/etc/zsh/zshrc
+          source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
         fi
       '';
       promptInit = ''
