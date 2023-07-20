@@ -252,7 +252,7 @@ in
     mprocs
     tldr
     bat
-
+    config.materus.profile.packages.home-manager
 
     # pgcli
     # litecli
@@ -321,7 +321,7 @@ in
   environment.etc = {
 
     
-
+    /*
     "libvirt/hooks/qemu.d/win11/prepare/begin/start.sh" = {
       text =
         ''
@@ -450,14 +450,18 @@ in
           systemctl set-property --runtime -- system.slice AllowedCPUs=0-3
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-3
         '';
-      /*text = ''
+        
+
+
+      text = ''
         #!/usr/bin/env bash
         reboot
         '';*-/
         mode = "0755";
         };
         "libvirt/vgabios/patched.rom".source = ./vbios.rom;
-        }; */
+        }; 
     };
+    */
   };
 }
