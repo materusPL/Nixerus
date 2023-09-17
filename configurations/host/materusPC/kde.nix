@@ -35,7 +35,7 @@ in
       CursorSize = "24";
     };
     Wayland = {
-      #CompositorCommand = "${pkgs.weston}/bin/weston --drm-device=card0 --additional-devices=card1 -c ${westonSddm}";
+      #CompositorCommand = "${pkgs.weston}/bin/weston  -c ${westonSddm}";
     };
   };
   services.xserver.desktopManager.plasma5.enable = true;
@@ -46,7 +46,7 @@ in
   environment.plasma5.excludePackages = with pkgs; [ libsForQt5.kwallet libsForQt5.kwalletmanager libsForQt5.kwallet-pam ];
   
   environment.variables = {
-    KWIN_DRM_NO_AMS = "1";
+    #KWIN_DRM_NO_AMS = "1";
   };
   environment.systemPackages = with pkgs; [
 

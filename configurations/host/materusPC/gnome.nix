@@ -19,6 +19,7 @@
   services.gnome.core-os-services.enable = true;
 
   programs.gnupg.agent.pinentryFlavor = "gnome3";
+  
 
   programs.gnome-terminal.enable = true;
   
