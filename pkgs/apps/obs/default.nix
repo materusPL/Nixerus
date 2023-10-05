@@ -47,8 +47,8 @@
 , amf-headers 
 , libGL
 , vulkan-loader
-, decklinkSupport ? false
-, blackmagic-desktop-video
+#, decklinkSupport ? false
+#, blackmagic-desktop-video
 , libcef
 }:
 
@@ -139,9 +139,9 @@ stdenv.mkDerivation rec {
     wrapperLibraries = [
       xorg.libX11
       libvlc
-    ] ++ optionals decklinkSupport [
+    ]; /*++ optionals decklinkSupport [
       blackmagic-desktop-video
-    ];
+    ];*/
   in
   ''
     #Remove libs from libcef, they are symlinks and can't be patchelfed
