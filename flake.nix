@@ -1,5 +1,5 @@
 {
-  description = "Nixerus - System config and repo";
+  description = "Nixerus - NUR Repo, Inputs for system config";
   inputs = {
     nixpkgs = {
       type = "github";
