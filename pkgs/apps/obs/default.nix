@@ -50,7 +50,7 @@
 , decklinkSupport ? false
 , blackmagic-desktop-video ? null
 , libcef
-, libdatachannel ? pkgs.callPackage ./libdatachannel.nix {}
+, libdatachannel 
 , pkgs
 , qrcodegencpp ? pkgs.callPackage ./qrcodegencpp.nix {}
 , onevpl ? pkgs.callPackage ./onevpl.nix {}
