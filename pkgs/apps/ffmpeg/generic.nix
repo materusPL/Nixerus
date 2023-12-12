@@ -94,7 +94,7 @@
 , withVoAmrwbenc ? withFullDeps # AMR-WB encoder
 , withVorbis ? withHeadlessDeps # Vorbis de/encoding, native encoder exists
 , withVpx ? withHeadlessDeps && stdenv.buildPlatform == stdenv.hostPlatform # VP8 & VP9 de/encoding
-, withVulkan ? false
+, withVulkan ? withFullDeps && !stdenv.isDarwin
 , withWebp ? withFullDeps # WebP encoder
 , withX264 ? withHeadlessDeps # H.264/AVC encoder
 , withX265 ? withHeadlessDeps # H.265/HEVC encoder
