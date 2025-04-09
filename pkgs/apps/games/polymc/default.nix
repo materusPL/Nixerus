@@ -101,7 +101,7 @@ let
       postPatch = ''
         # hardcode jdk paths
         substituteInPlace launcher/java/JavaUtils.cpp \
-          --replace 'scanJavaDir("/usr/lib/jvm")' 'javas.append("${jdk21}/lib/openjdk/bin/java")' 
+          --replace 'scanJavaDir("/usr/lib/jvm")' 'javas.append("${jdk}/lib/openjdk/bin/java")' 
       '';
 
       postFixup = ''
