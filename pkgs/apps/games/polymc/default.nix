@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , cmake
 , ninja
-, jdk21
+, jdk
 , ghc_filesystem
 , zlib
 , file
@@ -21,7 +21,7 @@
 , quazip
 , libGL
 , flite
-, addOpenGLRunpath
+, addDriverRunpath
 , vulkan-loader
 , msaClientID ? null
 , extra-cmake-modules
@@ -56,7 +56,7 @@ let
         stdenv.cc.cc.lib
       ]);
 
-      gameLibraryPath = libpath + ":${addOpenGLRunpath.driverLink}/lib";
+      gameLibraryPath = libpath + ":${addDriverRunpath.driverLink}/lib";
 
 
     in
@@ -76,7 +76,7 @@ let
         cmake
         extra-cmake-modules
         ninja
-        jdk21
+        jdk
         wrapQtAppsHook
         file
         ghc_filesystem
