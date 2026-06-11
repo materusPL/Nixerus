@@ -15,7 +15,6 @@
   product = "IntelliJ IDEA Community";
   productShort = "IDEA";
 
-  # update-script-start: version
   version = "2026.1.3";
   buildNumber = "261.25134.95";
   meta = (oldAttrs.meta or {}) // {
